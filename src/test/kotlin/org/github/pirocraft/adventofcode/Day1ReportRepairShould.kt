@@ -3,7 +3,7 @@ package org.github.pirocraft.adventofcode
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class ReportRepairShould {
+class Day1ReportRepairShould {
     private val reportRepair = ReportRepair()
 
     @Test
