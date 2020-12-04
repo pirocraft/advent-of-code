@@ -8,28 +8,27 @@ class ReportRepairShould {
 
     @Test
     internal fun `multiply the two entries whose sum is 2020`() {
-        assertEquals(514579, reportRepair.multiply2EntriesWhoseSumIs2020(expenseReportExample))
-        assertEquals(1016964, reportRepair.multiply2EntriesWhoseSumIs2020(expenseReport))
+        assertEquals(514579, reportRepair.multiply2EntriesWhoseSumIs2020(expenseReportExample.split("\n")))
+        assertEquals(1016964, reportRepair.multiply2EntriesWhoseSumIs2020(expenseReport.split("\n")))
     }
 
     @Test
     internal fun `multiply the three entries whose sum is 2020`() {
-        assertEquals(241861950, reportRepair.multiply3EntriesWhoseSumIs2020(expenseReportExample))
-        assertEquals(182588480, reportRepair.multiply3EntriesWhoseSumIs2020(expenseReport))
+        assertEquals(241861950, reportRepair.multiply3EntriesWhoseSumIs2020(expenseReportExample.split("\n")))
+        assertEquals(182588480, reportRepair.multiply3EntriesWhoseSumIs2020(expenseReport.split("\n")))
     }
 
     class ReportRepair {
-        fun multiply2EntriesWhoseSumIs2020(expenseReport: String): Int = expenseReport
-            .split("\n")
+        fun multiply2EntriesWhoseSumIs2020(expenseReport: List<String>): Int = expenseReport
             .map(String::toInt)
             .let { expenses ->
-                expenses.flatMap { currentExpense ->
-                    expenses.mapNotNull { if (currentExpense + it == 2020) currentExpense * it else null }
-                }.first()
+                expenses.map { currentExpense ->
+                    currentExpense to expenses.firstOrNull { currentExpense + it == 2020 }
+                }.first { (a, b) -> b != null }.let { (a, b) -> a * b!! }
+
             }
 
-        fun multiply3EntriesWhoseSumIs2020(expenseReport: String): Int = expenseReport
-            .split("\n")
+        fun multiply3EntriesWhoseSumIs2020(expenseReport: List<String>): Int = expenseReport
             .map(String::toInt)
             .let { expenses ->
                 expenses.flatMap { currentExpense ->
