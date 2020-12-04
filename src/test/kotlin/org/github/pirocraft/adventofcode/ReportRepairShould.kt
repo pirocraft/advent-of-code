@@ -18,15 +18,14 @@ class ReportRepairShould {
     }
 
     class ReportRepair {
-        fun multiplyEntriesWhoseSumIs2020(expenseReportExample: String): Int {
-            val expenses = expenseReportExample.split("\n")
-            return expenses.flatMap { it ->
-                val currentExpense = it.toInt()
-                expenses.mapNotNull {
-                    if (currentExpense + it.toInt() == 2020) currentExpense * it.toInt() else null
-                }
-            }.last()
-        }
+        fun multiplyEntriesWhoseSumIs2020(expenseReportExample: String): Int = expenseReportExample
+            .split("\n")
+            .map(String::toInt)
+            .let { expenses ->
+                expenses.flatMap { currentExpense ->
+                    expenses.mapNotNull { if (currentExpense + it == 2020) currentExpense * it else null }
+                }.first()
+            }
     }
 
     val expenseReportExample = "1721\n" +
