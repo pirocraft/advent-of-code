@@ -8,22 +8,38 @@ class ReportRepairShould {
 
     @Test
     internal fun `multiply the two entries whose sum is 2020`() {
-        assertEquals(514579, reportRepair.multiplyEntriesWhoseSumIs2020(expenseReportExample))
-        assertEquals(1016964, reportRepair.multiplyEntriesWhoseSumIs2020(expenseReport))
+        assertEquals(514579, reportRepair.multiply2EntriesWhoseSumIs2020(expenseReportExample))
+        assertEquals(1016964, reportRepair.multiply2EntriesWhoseSumIs2020(expenseReport))
     }
 
     @Test
     internal fun `multiply the three entries whose sum is 2020`() {
-        TODO("")
+        assertEquals(241861950, reportRepair.multiply3EntriesWhoseSumIs2020(expenseReportExample))
+        assertEquals(182588480, reportRepair.multiply3EntriesWhoseSumIs2020(expenseReport))
     }
 
     class ReportRepair {
-        fun multiplyEntriesWhoseSumIs2020(expenseReportExample: String): Int = expenseReportExample
+        fun multiply2EntriesWhoseSumIs2020(expenseReport: String): Int = expenseReport
             .split("\n")
             .map(String::toInt)
             .let { expenses ->
                 expenses.flatMap { currentExpense ->
                     expenses.mapNotNull { if (currentExpense + it == 2020) currentExpense * it else null }
+                }.first()
+            }
+
+        fun multiply3EntriesWhoseSumIs2020(expenseReport: String): Int = expenseReport
+            .split("\n")
+            .map(String::toInt)
+            .let { expenses ->
+                expenses.flatMap { currentExpense ->
+                    expenses.flatMap { intermediateExpense ->
+                        expenses.mapNotNull {
+                            if (currentExpense + intermediateExpense + it == 2020)
+                                currentExpense * intermediateExpense * it
+                            else null
+                        }
+                    }
                 }.first()
             }
     }
