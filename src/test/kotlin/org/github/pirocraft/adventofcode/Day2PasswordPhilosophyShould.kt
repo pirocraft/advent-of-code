@@ -13,7 +13,7 @@ class Day2PasswordPhilosophyShould {
         assertEquals(2, passwordPhilosophy.howManyPasswordsAreValid(passwordsExample.split("\n")))
         assertEquals(
             542,
-            passwordPhilosophy.howManyPasswordsAreValid(InputLoader.loadInput("passwordsInput").split("\n"))
+            passwordPhilosophy.howManyPasswordsAreValid(InputLoader.loadInput("passwordsInput"))
         )
     }
 
@@ -22,7 +22,7 @@ class Day2PasswordPhilosophyShould {
         assertEquals(1, officialAuthenticationSystem.howManyPasswordsAreValid(passwordsExample.split("\n")))
         assertEquals(
             360,
-            officialAuthenticationSystem.howManyPasswordsAreValid(InputLoader.loadInput("passwordsInput").split("\n"))
+            officialAuthenticationSystem.howManyPasswordsAreValid(InputLoader.loadInput("passwordsInput"))
         )
     }
 
